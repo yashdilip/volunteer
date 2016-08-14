@@ -12,6 +12,7 @@ public class Application {
 		User u = new User();
 		u.setName("Dilip");
 		dao.create(u);
+		System.out.println("Test");
 	}
 
 }
