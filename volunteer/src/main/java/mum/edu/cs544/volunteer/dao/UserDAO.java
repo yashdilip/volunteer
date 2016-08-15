@@ -20,6 +20,7 @@ public class UserDAO implements IUserDAO{
 			em.persist(user);
 			tx.commit();
 		} catch (PersistenceException e) {
+			e.printStackTrace();
 			if (tx != null) {
 				tx.rollback();
 			}
@@ -49,6 +50,7 @@ public class UserDAO implements IUserDAO{
 			}
 			tx.commit();
 		} catch (PersistenceException e) {
+			e.printStackTrace();
 			if (tx != null) {
 				tx.rollback();
 			}
@@ -71,6 +73,7 @@ public class UserDAO implements IUserDAO{
 			em.persist(address);
 			tx.commit();
 		} catch (PersistenceException e) {
+			e.printStackTrace();
 			if (tx != null) {
 				tx.rollback();
 			}

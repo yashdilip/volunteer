@@ -80,12 +80,11 @@ public class Application {
 			}
 		}*/
 		
-		
+		service.saveUserAddress(address);
 		service.createUser(u);
-		//service.saveUserAddress(address);
-		//service.createNewProject(p);
-		//service.saveProjectTask(t1);
-		//service.saveProjectTask(t2);
+		service.saveProjectTask(t1);
+		service.saveProjectTask(t2);
+		service.createNewProject(p);
 		
 		System.out.println("Test");
 		
