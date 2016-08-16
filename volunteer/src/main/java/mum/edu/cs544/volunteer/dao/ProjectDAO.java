@@ -109,11 +109,12 @@ public class ProjectDAO implements IProjectDAO {
 		try {
 			tx = em.getTransaction();
 			tx.begin();
-			Query query = em.createQuery("FROM Project p JOIN p.tasks t WHERE t.resourceRequired like :skill");
+			Query query = em.createQuery("SELECT p FROM Project p JOIN p.tasks t WHERE t.resourceRequired like :skill");
 			query.setParameter("skill", "%" + resource + "%");
 			projects = query.getResultList();
 			tx.commit();
 		} catch (PersistenceException e) {
+			e.printStackTrace();
 			if (tx != null) {
 				tx.rollback();
 			}
@@ -225,8 +226,7 @@ public class ProjectDAO implements IProjectDAO {
 		try {
 			tx = em.getTransaction();
 			tx.begin();
-			Query query = em.createQuery(
-					"FROM Project p JOIN p.tasks t WHERE COUNT(p.users)>=1 ORDER BY t.timeframeToCompleteInDays");
+			Query query = em.createQuery("SELECT p FROM Project p JOIN p.tasks t WHERE COUNT(p.users)>=1 ORDER BY t.timeframeToCompleteInDays");
 			projects = query.getResultList();
 			tx.commit();
 		} catch (PersistenceException e) {

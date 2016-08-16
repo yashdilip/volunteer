@@ -20,4 +20,11 @@ public interface IService {
 	void updateTask(Task t);
 	List<User> getAllUsers();
 	List<Project> getAllProjects();
+	List<Task> getAllTasksByProjectId(int projectId);
+	List<Project> getAllCompletedProjects();
+	List<Project> getAllIncompletedProjects();
+	List<Project> getProjectsByResource(String resources);
+	List<Project> getProjectsByKeyword(String keyword);
+	List<Project> getProjectsByLocation(String location);
+	List<Project> getAllProjectsAndTaskHavingVolunteer();
 }

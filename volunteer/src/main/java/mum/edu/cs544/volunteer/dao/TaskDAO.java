@@ -21,7 +21,7 @@ public class TaskDAO implements ITaskDAO{
 		try {
 			tx = em.getTransaction();
 			tx.begin();
-			Query query = em.createQuery("SELECT p.task FROM Project p WHERE p.projectId= :id");
+			Query query = em.createQuery("SELECT p.tasks FROM Project p WHERE p.projectId= :id");
 			query.setParameter("id", projectId);
 			tasks = query.getResultList();
 			tx.commit();

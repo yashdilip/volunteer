@@ -103,12 +103,77 @@ public class Application {
 		}
 		
 		/*get all projects*/
+		System.out.println("All Projects Lists");
 		List<Project> projectList = new ArrayList<Project>();
 		projectList = service.getAllProjects();
 		for(Project prj:projectList){
 			System.out.println(prj);
+			System.out.println("Tasks of the project");
+			/*get all tasks of a project*/
+			List<Task> taskList = new ArrayList<Task>();
+			taskList = service.getAllTasksByProjectId(prj.getProjectId());
+			for(Task tasks:taskList){
+				System.out.println(tasks);
+			}
 		}
 		
+		/*get all completed projects*/
+		System.out.println("Get all projects by status - completed");
+		List<Project> completedProject = new ArrayList<Project>();
+		completedProject = service.getAllCompletedProjects();
+		for(Project prj:completedProject){
+			System.out.println(prj);
+		}
+		
+		/*get all incompleted projects*/
+		System.out.println("Get all projects by status - incompleted");
+		List<Project> incompletedProject = new ArrayList<Project>();
+		incompletedProject = service.getAllIncompletedProjects();
+		for(Project prj:incompletedProject){
+			System.out.println(prj);
+		}
+		
+		/*search projects by type of resources/skill*/
+		String resourceSkill = "JPA";
+		System.out.println("All projects that requires skill - "+resourceSkill);
+		List<Project> prjListBySkill = new ArrayList<Project>();
+		prjListBySkill = service.getProjectsByResource(resourceSkill);
+		for(Project prj:prjListBySkill){
+			System.out.println(prj);
+		}
+		
+		/*search projects by type of keyword*/
+		String keyword = "application";
+		System.out.println("All projects that matches in name - "+keyword);
+		List<Project> prjListByKeyword = new ArrayList<Project>();
+		prjListByKeyword = service.getProjectsByKeyword(keyword);
+		for(Project prj:prjListByKeyword){
+			System.out.println(prj);
+		}
+		
+		/*search projects by type of keyword*/
+		String location = "FairField";
+		System.out.println("All projects that matches the location - "+location);
+		List<Project> prjListByLocation = new ArrayList<Project>();
+		prjListByLocation = service.getProjectsByLocation(location);
+		for(Project prj:prjListByLocation){
+			System.out.println(prj);
+		}
+		
+		/*get all projects and task that are offered service by volunteers*/
+		System.out.println("All Projects Lists having Volunteer");
+		List<Project> projectListInProgress = new ArrayList<Project>();
+		projectListInProgress = service.getAllProjects();
+		for(Project prj:projectListInProgress){
+			System.out.println(prj);
+			System.out.println("Tasks of the project having Volunteer");
+			/*get all tasks of a project*/
+			List<Task> taskListInProgress = new ArrayList<Task>();
+			taskListInProgress = service.getAllTasksByProjectId(prj.getProjectId());
+			for(Task tasks:taskListInProgress){
+				System.out.println(tasks);
+			}
+		}
 		
 	}
 	

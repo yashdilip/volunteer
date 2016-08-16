@@ -65,5 +65,33 @@ public class ServiceImpl implements IService {
 
 	public List<Project> getAllProjects() {
 		return projectDAO.getAllProjects();
+	}
+
+	public List<Task> getAllTasksByProjectId(int projectId) {
+		return taskDAO.getAllTaskByProjectId(projectId);
+	}
+
+	public List<Project> getAllCompletedProjects() {
+		return projectDAO.getAllCompletedProjects();
+	}
+
+	public List<Project> getAllIncompletedProjects() {
+		return projectDAO.getAllIncompletedProjects();
+	}
+
+	public List<Project> getProjectsByResource(String resources) {
+		return projectDAO.searchProjectByResource(resources);
+	}
+
+	public List<Project> getProjectsByKeyword(String keyword) {
+		return projectDAO.searchProjectByKeyword(keyword);
+	}
+
+	public List<Project> getProjectsByLocation(String location) {
+		return projectDAO.searchProjectByLocation(location);
+	}
+
+	public List<Project> getAllProjectsAndTaskHavingVolunteer() {
+		return projectDAO.getAllProjectsHavingVolunteer();
 	}	
 }
