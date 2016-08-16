@@ -81,7 +81,6 @@ public class Application {
 		service.createNewProject(p);
 		
 		
-		
 		/*project update i.e. assigned user to project*/
 		Project proj = new Project();
 		proj = service.getProjectByName("Volunteering application");

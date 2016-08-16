@@ -1,6 +1,7 @@
 package mum.edu.cs544.volunteer.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -62,6 +63,12 @@ public class Beneficiary {
 
 	public void setProjects(List<Project> projects) {
 		this.projects = projects;
+	}
+
+	@Override
+	public String toString() {
+		return "Beneficiary [beneficiaryId=" + beneficiaryId + ", beneficiaryName=" + beneficiaryName
+				+ ", beneficiaryDescription=" + beneficiaryDescription + "]";
 	}
 	
 }

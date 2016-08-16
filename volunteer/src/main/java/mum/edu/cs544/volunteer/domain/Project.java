@@ -127,5 +127,12 @@ public class Project {
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
+
+	@Override
+	public String toString() {
+		return "Project [projectId=" + projectId + ", projectname=" + projectname + ", description=" + description
+				+ ", location=" + location + ", startDate=" + startDate + ", endDate=" + endDate + ", projectStatus="
+				+ projectStatus + "]";
+	}
 	
 }

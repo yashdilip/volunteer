@@ -88,5 +88,9 @@ public class User {
 	public void setTaskOffered(List<Task> taskOffered) {
 		this.taskOffered = taskOffered;
 	}
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", name=" + name + ", email=" + email + ", role=" + role + "]";
+	}
 	
 }

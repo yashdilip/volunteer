@@ -1,5 +1,7 @@
 package mum.edu.cs544.volunteer.domain;
 
+import java.util.Arrays;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -79,6 +81,13 @@ public class Task {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	@Override
+	public String toString() {
+		return "Task [taskId=" + taskId + ", description=" + description + ", timeframeToCompleteInDays="
+				+ timeframeToCompleteInDays + ", taskStatus=" + taskStatus
+				+ ", resourceRequired=" + resourceRequired + "]";
 	}
 	
 }
