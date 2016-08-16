@@ -27,4 +27,5 @@ public interface IService {
 	List<Project> getProjectsByKeyword(String keyword);
 	List<Project> getProjectsByLocation(String location);
 	List<Project> getAllProjectsAndTaskHavingVolunteer();
+	List<Beneficiary> getAllBeneficiariesOfProjectById(int projectId);
 }

@@ -93,5 +93,9 @@ public class ServiceImpl implements IService {
 
 	public List<Project> getAllProjectsAndTaskHavingVolunteer() {
 		return projectDAO.getAllProjectsHavingVolunteer();
+	}
+
+	public List<Beneficiary> getAllBeneficiariesOfProjectById(int projectId) {
+		return beneficiaryDAO.getAllBeneficiariesByProjectId(projectId);
 	}	
 }

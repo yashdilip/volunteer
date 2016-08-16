@@ -70,14 +70,16 @@ public class Application {
 		b.setBeneficiaryDescription("This project will be used for future students");
 		b.setProjects(Arrays.asList(p));
 		b.setImage(Files.readAllBytes(path));
+		p.setBeneficiaries(Arrays.asList(b));
 		
 		/*persisting into database*/
 		service.saveUserAddress(address);
 		service.createUser(u);
 		service.saveProjectTask(t1);
 		service.saveProjectTask(t2);
-		service.createNewProject(p);
 		service.createBeneficiary(b);
+		service.createNewProject(p);
+		
 		
 		
 		/*project update i.e. assigned user to project*/
@@ -172,6 +174,21 @@ public class Application {
 			taskListInProgress = service.getAllTasksByProjectId(prj.getProjectId());
 			for(Task tasks:taskListInProgress){
 				System.out.println(tasks);
+			}
+		}
+		
+		/*get all projects and beneficiaries*/
+		System.out.println("All Projects Lists having Volunteer");
+		List<Project> projectWithBeneficiaries = new ArrayList<Project>();
+		projectWithBeneficiaries = service.getAllProjects();
+		for(Project prj:projectListInProgress){
+			System.out.println(prj);
+			System.out.println("Beneficiaries of the project are - ");
+			/*get all beneficiaries of the project*/
+			List<Beneficiary> list = new ArrayList<Beneficiary>();
+			list = service.getAllBeneficiariesOfProjectById(prj.getProjectId());
+			for(Beneficiary bene:list){
+				System.out.println(bene);
 			}
 		}
 		
