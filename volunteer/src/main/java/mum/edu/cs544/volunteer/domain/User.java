@@ -29,9 +29,8 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	
-	@ManyToMany
-	@JoinTable(name="USER_PROJECT", joinColumns=@JoinColumn(name="userId"), 
-	inverseJoinColumns=@JoinColumn(name="projectId"))
+	@ManyToMany(mappedBy="users")
+	
 	private List<Project> projects = new ArrayList<Project>();
 	
 	@OneToMany(mappedBy="user")

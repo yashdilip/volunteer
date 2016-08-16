@@ -10,5 +10,6 @@ public interface ITaskDAO {
 	List<Task> getAllTaskByProjectId(int projectId);
 	void updateTask(Task task);
 	List<Task> getAllTaskOfferedByVolunteer();
+	List<Task> getTaskBySkill(String skill);
 
 }

@@ -1,13 +1,15 @@
 package mum.edu.cs544.volunteer.control;
 
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import javax.persistence.PersistenceException;
-
-import mum.edu.cs544.volunteer.configuration.JPAUtil;
 import mum.edu.cs544.volunteer.domain.Address;
+import mum.edu.cs544.volunteer.domain.Beneficiary;
 import mum.edu.cs544.volunteer.domain.Project;
 import mum.edu.cs544.volunteer.domain.Role;
 import mum.edu.cs544.volunteer.domain.Task;
@@ -17,8 +19,11 @@ import mum.edu.cs544.volunteer.service.ServiceImpl;
 
 public class Application {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		IService service = new ServiceImpl();
+		
+		/*for image upload*/
+		Path path = FileSystems.getDefault().getPath("C:\\tmp", "star_trek.jpg");
 		
 		System.out.println("Creating User...");
 		User u = new User();
@@ -49,6 +54,7 @@ public class Application {
 		t1.setResourceRequired("JPA, Hibernate");
 		t1.setTaskStatus("incompleted");
 		t1.setTimeframeToCompleteInDays(1.5);
+		t1.setImage(Files.readAllBytes(path));
 		
 		Task t2 = new Task();
 		t2.setDescription("database mapping");
@@ -56,38 +62,52 @@ public class Application {
 		t2.setTaskStatus("incomplete");
 		t2.setTimeframeToCompleteInDays(0.5);
 		p.setTasks(Arrays.asList(t1,t2));
+		t2.setImage(Files.readAllBytes(path));
 		
+		System.out.println("creating beneficiary");
+		Beneficiary b = new Beneficiary();
+		b.setBeneficiaryName("MUM");
+		b.setBeneficiaryDescription("This project will be used for future students");
+		b.setProjects(Arrays.asList(p));
+		b.setImage(Files.readAllBytes(path));
 		
-		/*EntityManager em = JPAUtil.getEntityManager();
-		EntityTransaction tx = null;
-		
-		try {
-			tx = em.getTransaction();
-			tx.begin();
-			em.persist(u);
-			em.persist(address);
-			em.persist(p);
-			em.persist(t1);
-			em.persist(t2);
-			tx.commit();
-		} catch (PersistenceException e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-		} finally {
-			if (em != null) {
-				em.close();
-			}
-		}*/
-		
+		/*persisting into database*/
 		service.saveUserAddress(address);
 		service.createUser(u);
 		service.saveProjectTask(t1);
 		service.saveProjectTask(t2);
 		service.createNewProject(p);
+		service.createBeneficiary(b);
 		
-		System.out.println("Test");
 		
+		/*project update i.e. assigned user to project*/
+		Project proj = new Project();
+		proj = service.getProjectByName("Volunteering application");
+		proj.setUsers(Arrays.asList(u));
+		service.updateProject(proj);
+		
+		/*assigning user to a task based on the resource*/
+		List<Task> tlist = new ArrayList<Task>();
+		tlist = service.getTasksByResource("JPA");
+		for(Task t:tlist){
+			t.setUser(u);
+			service.updateTask(t);
+			
+		}
+		
+		/*get all users*/
+		List<User> userslist = new ArrayList<User>();
+		userslist = service.getAllUsers();
+		for(User usr:userslist){
+			System.out.println(usr);
+		}
+		
+		/*get all projects*/
+		List<Project> projectList = new ArrayList<Project>();
+		projectList = service.getAllProjects();
+		for(Project prj:projectList){
+			System.out.println(prj);
+		}
 		
 		
 	}

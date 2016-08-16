@@ -33,7 +33,9 @@ public class Project {
 	inverseJoinColumns = @JoinColumn(name="taskId"))
 	private List<Task> tasks = new ArrayList<Task>();
 	
-	@ManyToMany(mappedBy="projects")
+	@ManyToMany
+	@JoinTable(name="USER_PROJECT", joinColumns=@JoinColumn(name="projectId"), 
+	inverseJoinColumns=@JoinColumn(name="userId"))
 	private List<User> users = new ArrayList<User>();
 	
 	private String projectStatus;
@@ -116,6 +118,14 @@ public class Project {
 
 	public void setBeneficiaries(List<Beneficiary> beneficiaries) {
 		this.beneficiaries = beneficiaries;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 	
 }

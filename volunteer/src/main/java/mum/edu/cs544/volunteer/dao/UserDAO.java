@@ -1,4 +1,7 @@
 package mum.edu.cs544.volunteer.dao;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
@@ -84,4 +87,31 @@ public class UserDAO implements IUserDAO{
 		}
 		
 	}
+
+	public List<User> getAllUsers() {
+		EntityManager em = JPAUtil.getEntityManager();
+		EntityTransaction tx = null;
+		List<User> ulist = new ArrayList<User>();
+		
+		try {
+			tx = em.getTransaction();
+			tx.begin();
+			Query query = em.createQuery("FROM User u");
+			ulist = query.getResultList();
+			tx.commit();
+		} catch (PersistenceException e) {
+			e.printStackTrace();
+			if (tx != null) {
+				tx.rollback();
+			}
+		} finally {
+			if (em != null) {
+				em.close();
+			}
+		}
+		
+		return ulist;
+	}
+
+
 }
